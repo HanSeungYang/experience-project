@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+a { text-decoration:none; }
+
+html { position:relative; min-height:100%; background-image:url(subtlepatterns_dust.png); }
+body { padding:0 0.2rem 6rem 0.2rem; }
+@media(min-width:980px) { body { padding:0 3rem 6rem 3rem; } }
+
+.site-index-title, .site-index-title a, .site-brand { color:#ff4136; }
+.site-brand:before { content:'?'; font-size:4rem; color:#fe0; text-shadow:-2px 2px #cc0; line-height:0.5em; vertical-align:top; }
+.site-index-title h1 { margin-bottom:0.2em; }
+.site-index-title h2 { margin:0 0 2rem 4rem; font-size:1rem; }
+
+.site-footer { position:absolute; right:0; bottom:0; left:0; padding:1rem 3rem 1rem 3rem; }
+
+pre { font-family:"Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace !important; }
+
+/* adapted from spectre.css */
+:lang(zh), :lang(ja), :lang(ko), .cjk { font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Hiragino Kaku Gothic Pro",Meiryo,"Malgun Gothic","Helvetica Neue",sans-serif; }
+:lang(zh) ins, :lang(ja) ins, .cjk ins, :lang(zh) u, :lang(ja) u, .cjk u { border-bottom:.1rem solid; text-decoration: none; }
+:lang(zh) del + del, :lang(ja) del + del, .cjk del + del, :lang(zh) del + s, :lang(ja) del + s, .cjk del + s, :lang(zh) ins + ins, :lang(ja) ins + ins, .cjk ins + ins, :lang(zh) ins + u, :lang(ja) ins + u, .cjk ins + u, :lang(zh) s + del, :lang(ja) s + del, .cjk s + del, :lang(zh) s + s, :lang(ja) s + s, .cjk s + s, :lang(zh) u + ins, :lang(ja) u + ins, .cjk u + ins, :lang(zh) u + u, :lang(ja) u + u, .cjk u + u { margin-left:.125em; }

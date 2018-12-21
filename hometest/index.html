@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>HomeCam: browser-based home surveillance camera</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/g/pure@0.6.2(pure-min.css+grids-responsive-min.css)">
+<link rel="stylesheet" href="/assets/2017/style.css">
+
+<div class="pure-g">
+<hgroup class="site-index-title pure-u-1">
+<h1><a href="/" class="site-brand">yoursunny</a>
+<a href="&#x2F;p&#x2F;">Projects</a>
+</h1>
+</hgroup>
+</div>
+
+<div class="pure-g">
+<article class="pure-u-1">
+
+<h1>HomeCam: browser-based home surveillance camera</h1>
+
+<p>Turn your old laptop into a home surveillance camera, and watch your home from anywhere.</p>
+
+<form id="f_form" class="pure-form pure-form-aligned"><fieldset>
+<div class="pure-control-group">
+<label for="f_name">Camera name</label>
+<input type="text" id="f_name" name="name" required>
+</div>
+<div class="pure-control-group">
+<label>Mode</label>
+<input type="button" class="mode_btn pure-button pure-button-active" value="viewer">
+<input type="button" class="mode_btn pure-button" value="camera">
+</div>
+<div class="pure-control-group">
+<label for="f_key">Encryption key</label>
+<input type="text" id="f_key" name="key" disabled>
+<span id="f_keytip" class="pure-form-message-inline">(optional)</span>
+</div>
+<div class="pure-controls">
+<input type="submit" class="pure-button pure-button-primary" value="GO">
+</div>
+</fieldset></form>
+
+<ol>
+<li>run the <strong>camera</strong> app from a laptop at your home
+
+<ul>
+<li>A web camera is required, obviously.</li>
+<li>Remember to plug in the power adaptor.</li>
+</ul></li>
+<li>run the <strong>viewer</strong> app from any laptop or mobile device
+
+<ul>
+<li>Enter the same "camera name" on camera and viewer(s).
+A unique "camera name" can be used on one camera and multiple viewers.</li>
+<li>Enter the same "encryption key" on camera and viewer(s).
+The picture won't display correctly if the encryption key is wrong.</li>
+</ul></li>
+</ol>
+
+<p>There is no privacy guarantee at this moment. Use at your own risk.</p>
+
+<h2>Technical Information</h2>
+
+<p>HomeCam is built with <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia">getUserMedia</a>, <a href="https://github.com/named-data/ndn-js">NDN-JS</a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto">crypto.subtle</a>.
+A technical overview has been published at <a href="/t/2017/how-homecam-works/">How HomeCam Works?</a></p>
+
+<p>HomeCam is known to work in the following browsers:</p>
+
+<ul>
+<li>Firefox on Windows/Debian/Ubuntu</li>
+<li>Microsoft Edge on Windows</li>
+<li>Chrome on Android</li>
+<li>Safari/Chrome on iOS (unencrypted viewer only)</li>
+<li>Internet Explorer on Windows Phone 8.1 (unencrypted viewer only)</li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.slim.min.js"></script>
+
+<script>
+if (!window.Promise) {
+  document.write('<' + 'script src="https://cdn.jsdelivr.net/es6-promise-polyfill/1.2.0/promise.min.js"></' + 'script>');
+}
+</script>
+
+<script src="encryption.js"></script>
+
+<script>
+$('#f_form .mode_btn').click(function(){
+  $('#f_form .mode_btn').removeClass('pure-button-active');
+  $(this).addClass('pure-button-active');
+});
+
+$('#f_form').submit(function(evt){
+  evt.preventDefault();
+  var u = '?' + $('#f_form .mode_btn.pure-button-active').val() +
+          '=' + encodeURIComponent($('#f_name').val());
+  var key = $('#f_key').val();
+  if (key != '') {
+    u += '#key=' + encodeURIComponent(key);
+  }
+  location = u;
+});
+
+detectEncryptionFeature()
+.then(function(){
+  $('#f_key').prop('disabled', false);
+})
+.catch(function(reason){
+  $('#f_keytip').text('not supported in this browser: ' + reason);
+});
+</script>
+
+
+</article>
+</div>
+
+<footer class="site-footer pure-g">
+<div class="pure-u-1">&copy;2017 yoursunny.com</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/ga-lite/1.1.1/ga-lite.min.js"></script>
+<script>
+galite = window.galite || {};
+if (location.hostname == 'yoursunny.com') {
+  galite.UA = 'UA-935676-1';
+  document.write('<div style="display:none;"><script src="//js.users.51.la/1697972.js"></' + 'script></div>');
+}
+</script>
